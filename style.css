@@ -21,9 +21,43 @@ span.caption.go { color: red; }
 #tracker .item,
 #tracker .boss,
 #tracker [id^="chest"] { width: 64px; height: 64px; }
+#tracker [id^="ks"] { width: 64px; height: 64px; background-size: contain; }
+#tracker [id^="ks"] .bigkey {width: 28px; height: 32px; background-size: contain; position: absolute; top: 0; right: 0; background-image: url(images/keys/BK0.png); }
+#tracker [id^="ks"] .bigkey.active {background-image: url(images/keys/BK.png); }
+#tracker [id^="ks"] .smallkeys-left {width: 64px; height: 64px; background-size: contain; position: absolute; top: 0; left: 0; }
+#tracker [id^="ks"] .clickmask-left {width: 32px; height: 64px; position: absolute; top: 0; left: 0; }
+#tracker [id^="ks"] .smallkeys-right {width: 32px; height: 32px; background-size: contain; position: absolute; bottom: 0; right: 0; }
+#tracker [id^="ks"] .clickmask-right {width: 32px; height: 32px; position: absolute; bottom: 0; right: 0; }
+#tracker [id^="ks"] .keys0 {background-image: url(images/keys/K0.png); }
+#tracker [id^="ks"] .keys1 {background-image: url(images/keys/K1.png); }
+#tracker [id^="ks"] .keys2 {background-image: url(images/keys/K2.png); }
+#tracker [id^="ks"] .keys3 {background-image: url(images/keys/K3.png); }
+#tracker [id^="ks"] .keys4 {background-image: url(images/keys/K4.png); }
+#tracker [id^="ks"] .keys5 {background-image: url(images/keys/K5.png); }
+#tracker [id^="ks"] .keys6 {background-image: url(images/keys/K6.png); }
+
+.ks-chests { position:absolute; top: 0; right: 0; width: 32px; height: 32px; background-size:contain;}
+.ks-chests-0 {background-image: url(images/keys/Chest0.png);}
+.ks-chests-1 {background-image: url(images/keys/Chest1.png);}
+.ks-chests-2 {background-image: url(images/keys/Chest2.png);}
+.ks-chests-3 {background-image: url(images/keys/Chest3.png);}
+.ks-chests-4 {background-image: url(images/keys/Chest4.png);}
+.ks-chests-5 {background-image: url(images/keys/Chest5.png);}
+.ks-chests-6 {background-image: url(images/keys/Chest6.png);}
+.ks-chests-7 {background-image: url(images/keys/Chest7.png);}
+.ks-chests-8 {background-image: url(images/keys/Chest8.png);}
+.ks-chests-9 {background-image: url(images/keys/Chest9.png);}
+.ks-chests-10 {background-image: url(images/keys/Chest10.png);}
+.ks-chests-11 {background-image: url(images/keys/Chest11.png);}
+.ks-chests-12 {background-image: url(images/keys/Chest12.png);}
+.ks-chests-13 {background-image: url(images/keys/Chest13.png);}
+.ks-chests-14 {background-image: url(images/keys/Chest14.png);}
+.ks-chests-15 {background-image: url(images/keys/Chest15.png);}
+.ks-chests-16 {background-image: url(images/keys/Chest16.png);}
 
 #gomode .item { width: 64px; height: 64px; background-size: 64px 64px; }
 #gomode .combination { width: 32px; height: 32px; background-size: 32px 32px; }
+.hotkey { position: relative; left: 48px; top: 48px; color: white; font-size: 12px; font-family: monospace;}
 
 #tracker .tunic { width: 128px; height: 128px; }
 #tracker .sword { position: absolute; top: 0; right: 0; }
@@ -113,6 +147,27 @@ span.caption.go { color: red; }
 
 .unavailable { background-color: red; }
 .available { background-color: lime; }
+.sequencebreak-flippers {
+  background-color: aqua;
+}
+.sequencebreak-flippers-check {
+  background-color: dodgerblue;
+}
+.sequencebreak-revival {
+  background-color: violet;
+}
+.sequencebreak-revival-check {
+  background-color: orchid;
+}
+.sequencebreak-jesusdash {
+  background-color: yellowgreen;
+}
+.sequencebreak-powder {
+  background-color: saddlebrown;
+}
+.sequencebreak-bunny {
+  background-color: thistle;
+}
 .possible { background-color: yellow; }
 .dark { background-color: blue; }
 .opened { background-color: #7f7f7f; }
@@ -211,6 +266,16 @@ span.caption.go { color: red; }
 .chest-4 { background-image: url(images/dungeons/chest4.png); }
 .chest-5 { background-image: url(images/dungeons/chest5.png); }
 .chest-6 { background-image: url(images/dungeons/chest6.png); }
+.ks-ep { background-image: url(images/keys/EP.png); }
+.ks-dp { background-image: url(images/keys/DP.png); }
+.ks-toh { background-image: url(images/keys/ToH.png); }
+.ks-pod { background-image: url(images/keys/PoD.png); }
+.ks-sp { background-image: url(images/keys/SP.png); }
+.ks-sw { background-image: url(images/keys/SW.png); }
+.ks-tt { background-image: url(images/keys/TT.png); }
+.ks-ip { background-image: url(images/keys/IP.png); }
+.ks-mm { background-image: url(images/keys/MM.png); }
+.ks-tr { background-image: url(images/keys/TR.png); }
 
 .bomb { background-image: url(images/overlay/bomb.png); }
 .crystal { background-image: url(images/overlay/crystal.png); }

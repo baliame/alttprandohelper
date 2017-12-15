@@ -1,4 +1,5 @@
 (function(window) {
+    var $ = jQuery;
     'use strict';
 
     var query = uri_query();
@@ -8,6 +9,7 @@
     window.map_enabled = query.map;
     window.gomode_indicator = (query.gomode !== "no");
     window.gomode_mode = query.gomode;
+    window.ks = query.ks;
 
     // Utility function: remove item from array.
     window.arr_remove = function(array, element) {
@@ -19,6 +21,31 @@
 
     // Event of clicking on the item tracker
     window.toggle = function(label) {
+        if (label.substring(0,7) === 'kchests') {
+            var lid = label.substring(7);
+            var value = items.dec(label);
+
+            $('#' + label).removeClass().addClass('ks-chests').addClass('ks-chests-' + (value));
+            return;
+        }
+        if (label.substring(0,2) === 'ks') {
+            var lid = label.substring(2);
+            var value = items.inc(label);
+            $('#' + label + " .smallkeys-left").removeClass().addClass('smallkeys-left').addClass('keys' + (value > 4 ? 4 : value));
+            $('#' + label + " .smallkeys-right").removeClass().addClass('smallkeys-right').addClass('keys' + (value > 4 ? value : 0));
+            return;
+        }
+        if (label.substring(0,2) === 'bk') {
+            var lid = label.substring(2);
+            var value = items.inc(label);
+            console.log(value);
+            if (value === 0) {
+                $('#ks' + lid + " .bigkey").removeClass('active');
+            } else {
+                $('#ks' + lid + " .bigkey").addClass('active');
+            }
+            return;
+        }
         if (label.substring(0,5) === 'chest') {
             var value = items.dec(label);
             document.getElementById(label).className = 'chest-' + value;
@@ -564,6 +591,12 @@
     window.start = function() {
         for (var k = 0; k < dungeons.length; k++) {
             prizes[k] = 0;
+        }
+
+        if (window.ks) {
+            $('.isachest').remove();
+        } else {
+            $('.isnotachest').remove();
         }
 
         if (mode !== 'open') {

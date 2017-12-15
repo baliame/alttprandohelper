@@ -24,15 +24,17 @@
         var mode = get_radio_configuration('mode'),
             map = get_radio_configuration('map') === 'yes',
             gomode = get_radio_configuration('gomode'),
+            ks = get_radio_configuration('ks') === 'yes',
             width = map ? 1340 : 448,
             height = (gomode !== "no") ? 548 : 448;
         console.log(gomode)
         console.log(height)
 
-        open('tracker.html?mode={mode}{map}&gomode={gomode}'
+        open('tracker.html?mode={mode}{map}{ks}&gomode={gomode}'
                 .replace('{mode}', mode)
                 .replace('{map}', map ? '&map' : '')
-                .replace('{gomode}', gomode),
+                .replace('{gomode}', gomode)
+                .replace('{ks}', ks ? "&ks": ''),
             '',
             'width={width},height={height},titlebar=0,menubar=0,toolbar=0,scrollbars=0,resizable=0'
                 .replace('{width}', width)

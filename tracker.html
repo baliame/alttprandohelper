@@ -5,6 +5,7 @@
 
   <link rel="stylesheet" type="text/css" href="style.css">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="js/util.js"></script>
   <script src="js/items.js"></script>
   <script src="js/chests.js"></script>
@@ -29,27 +30,57 @@
             <div class="cell">
               <div class="boss boss0" onClick="toggle('boss0')"></div>
               <div id="dungeonPrize0" class="prize-0" onClick="toggle_dungeon(0)"></div>
+              <div id="kchests0" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests0')"></div>
             </div>
-            <div class="cell"><div id="chest0" class="chest-3" onClick="toggle('chest0')"></div></div>
+            <div class="cell">
+              <div id="chest0" class="chest-3 isachest" onClick="toggle('chest0')"></div>
+              <div id="ks0" class="ks-ep isnotachest">
+                <div class="smallkeys-left keys0"></div>
+                <div class="smallkeys-right keys0"></div>
+                <div class="bigkey" onClick="toggle('bk0')"></div>
+                <div class="clickmask-left" onClick="toggle('ks0')"></div>
+                <div class="clickmask-right" onClick="toggle('ks0')"></div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="cell">
               <div class="boss boss1" onClick="toggle('boss1')"></div>
               <div id="dungeonPrize1" class="prize-0" onClick="toggle_dungeon(1)"></div>
+              <div id="kchests1" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests1')"></div>
             </div>
-            <div class="cell"><div id="chest1" class="chest-2" onClick="toggle('chest1')"></div></div>
+            <div class="cell">
+              <div id="chest1" class="chest-2 isachest" onClick="toggle('chest1')"></div>
+              <div id="ks1" class="ks-dp isnotachest">
+                <div class="smallkeys-left keys0"></div>
+                <div class="smallkeys-right keys0"></div>
+                <div class="bigkey" onClick="toggle('bk1')"></div>
+                <div class="clickmask-left" onClick="toggle('ks1')"></div>
+                <div class="clickmask-right" onClick="toggle('ks1')"></div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="cell">
               <div class="boss boss2" onClick="toggle('boss2')"></div>
               <div id="dungeonPrize2" class="prize-0" onClick="toggle_dungeon(2)"></div>
+              <div id="kchests2" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests2')"></div>
             </div>
-            <div class="cell"><div id="chest2" class="chest-2" onClick="toggle('chest2')"></div></div>
+            <div class="cell">
+              <div id="chest2" class="chest-2 isachest" onClick="toggle('chest2')"></div>
+              <div id="ks2" class="ks-toh isnotachest"">
+                <div class="smallkeys-left keys0"></div>
+                <div class="smallkeys-right keys0"></div>
+                <div class="bigkey" onClick="toggle('bk2')"></div>
+                <div class="clickmask-left" onClick="toggle('ks2')"></div>
+                <div class="clickmask-right" onClick="toggle('ks2')"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="cell">
           <div class="row">
-            <div class="cell"><div class="item bow" onClick="toggle('bow')"></div></div>
+            <div class="cell"><div class="item bow" onClick="toggle('bow')"><div class="hotkey">Q</div></div></div>
             <div class="cell"><div class="item boomerang" onClick="toggle('boomerang')"></div></div>
             <div class="cell"><div class="item hookshot" onClick="toggle('hookshot')"></div></div>
             <div class="cell"><div class="item mushroom" onClick="toggle('mushroom')"></div></div>
@@ -89,42 +120,112 @@
         <div class="cell">
           <div class="boss boss3" onClick="toggle('boss3')"></div>
           <div id="dungeonPrize3" class="prize-0" onClick="toggle_dungeon(3)"></div>
+          <div id="kchests3" class="ks-chests ks-chests-14 isnotachest" onClick="toggle('kchests3')"></div>
         </div>
         <div class="cell">
           <div class="boss boss4" onClick="toggle('boss4')"></div>
           <div id="dungeonPrize4" class="prize-0" onClick="toggle_dungeon(4)"></div>
+          <div id="kchests4" class="ks-chests ks-chests-7 isnotachest" onClick="toggle('kchests4')"></div>
         </div>
         <div class="cell">
           <div class="boss boss5" onClick="toggle('boss5')"></div>
           <div id="dungeonPrize5" class="prize-0" onClick="toggle_dungeon(5)"></div>
+          <div id="kchests5" class="ks-chests ks-chests-9 isnotachest" onClick="toggle('kchests5')"></div>
         </div>
         <div class="cell">
           <div class="boss boss6" onClick="toggle('boss6')"></div>
           <div id="dungeonPrize6" class="prize-0" onClick="toggle_dungeon(6)"></div>
+          <div id="kchests6" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests6')"></div>
         </div>
         <div class="cell">
           <div class="boss boss7" onClick="toggle('boss7')"></div>
           <div id="dungeonPrize7" class="prize-0" onClick="toggle_dungeon(7)"></div>
+          <div id="kchests7" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests7')"></div>
         </div>
         <div class="cell">
           <div class="boss boss8" onClick="toggle('boss8')"></div>
           <div id="medallion0" class="medallion-0" onClick="toggle_medallion(0)"></div>
           <div id="dungeonPrize8" class="prize-0" onClick="toggle_dungeon(8)"></div>
+          <div id="kchests8" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests8')"></div>
         </div>
         <div class="cell">
           <div class="boss boss9" onClick="toggle('boss9')"></div>
           <div id="medallion1" class="medallion-0" onClick="toggle_medallion(1)"></div>
           <div id="dungeonPrize9" class="prize-0" onClick="toggle_dungeon(9)"></div>
+          <div id="kchests9" class="ks-chests ks-chests-12 isnotachest" onClick="toggle('kchests9')"></div>
         </div>
       </div>
       <div class="row">
-        <div class="cell"><div id="chest3" class="chest-5" onClick="toggle('chest3')"></div></div>
-        <div class="cell"><div id="chest4" class="chest-6" onClick="toggle('chest4')"></div></div>
-        <div class="cell"><div id="chest5" class="chest-2" onClick="toggle('chest5')"></div></div>
-        <div class="cell"><div id="chest6" class="chest-4" onClick="toggle('chest6')"></div></div>
-        <div class="cell"><div id="chest7" class="chest-3" onClick="toggle('chest7')"></div></div>
-        <div class="cell"><div id="chest8" class="chest-2" onClick="toggle('chest8')"></div></div>
-        <div class="cell"><div id="chest9" class="chest-5" onClick="toggle('chest9')"></div></div>
+        <div class="cell">
+          <div id="chest3" class="chest-5 isachest" onClick="toggle('chest3')"></div>
+          <div id="ks3" class="ks-pod isnotachest" >
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk3')"></div>
+            <div class="clickmask-left" onClick="toggle('ks3')"></div>
+            <div class="clickmask-right" onClick="toggle('ks3')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest4" class="chest-6 isachest" onClick="toggle('chest4')"></div>
+          <div id="ks4" class="ks-sp isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk4')"></div>
+            <div class="clickmask-left" onClick="toggle('ks4')"></div>
+            <div class="clickmask-right" onClick="toggle('ks4')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest5" class="chest-2 isachest" onClick="toggle('chest5')"></div>
+          <div id="ks5" class="ks-sw isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk5')"></div>
+            <div class="clickmask-left" onClick="toggle('ks5')"></div>
+            <div class="clickmask-right" onClick="toggle('ks5')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest6" class="chest-4 isachest" onClick="toggle('chest6')"></div>
+          <div id="ks6" class="ks-tt isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk6')"></div>
+            <div class="clickmask-left" onClick="toggle('ks6')"></div>
+            <div class="clickmask-right" onClick="toggle('ks6')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest7" class="chest-3 isachest" onClick="toggle('chest7')"></div>
+          <div id="ks7" class="ks-ip isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk7')"></div>
+            <div class="clickmask-left" onClick="toggle('ks7')"></div>
+            <div class="clickmask-right" onClick="toggle('ks7')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest8" class="chest-2 isachest" onClick="toggle('chest8')"></div>
+          <div id="ks8" class="ks-mm isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk8')"></div>
+            <div class="clickmask-left" onClick="toggle('ks8')"></div>
+            <div class="clickmask-right" onClick="toggle('ks8')"></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div id="chest9" class="chest-5 isachest" onClick="toggle('chest9')"></div>
+          <div id="ks9" class="ks-tr isnotachest">
+            <div class="smallkeys-left keys0"></div>
+            <div class="smallkeys-right keys0"></div>
+            <div class="bigkey" onClick="toggle('bk9')"></div>
+            <div class="clickmask-left" onClick="toggle('ks9')"></div>
+            <div class="clickmask-right" onClick="toggle('ks9')"></div>
+          </div>
+        </div>
       </div>
     </div>
 

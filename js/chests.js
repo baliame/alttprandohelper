@@ -77,6 +77,8 @@
         },
         can_get_chest: function() {
             if (!items.moonpearl) return 'unavailable';
+            if (!items.agahnim && items.glove === 2 && !items.flippers && !items.hammer && items.boots) return 'sequencebreak-jesusdash';
+            if (!items.agahnim && items.glove === 2 && !items.flippers && !items.hammer && items.bottle) return 'sequencebreak-revival';
             if (!items.agahnim && !(items.hammer && items.glove) && !(items.glove === 2 && items.flippers)) return 'unavailable';
             return !(items.bow > 1 && items.lantern) ||
                 items.chest3 === 1 && !items.hammer ?
@@ -126,13 +128,23 @@
         caption: 'Ice Palace (yellow=must bomb jump)',
         is_beaten: false,
         is_beatable: function() {
-            if (!items.moonpearl || !items.flippers || items.glove !== 2 || !items.hammer) return 'unavailable';
+            if (items.flippers && !items.moonpearl && items.glove === 2 && (items.firerod || (items.bombos && items.sword)) && items.hammer) {
+                if (items.hookshot || items.somaria) return 'sequencebreak-revival';
+                return 'sequencebreak-revival-check';
+            }
+            if (!items.moonpearl || items.glove !== 2 || !items.hammer) return 'unavailable';
             if (!items.firerod && !(items.bombos && items.sword)) return 'unavailable';
+            if (!items.flippers) return 'sequencebreak-flippers';
             return items.hookshot || items.somaria ? 'available' : 'possible';
         },
         can_get_chest: function() {
-            if (!items.moonpearl || !items.flippers || items.glove !== 2) return 'unavailable';
+            if (items.flippers && !items.moonpearl && items.glove === 2 && (items.firerod || (items.bombos && items.sword))) {
+                if (items.hammer) return 'sequencebreak-revival';
+                return 'sequencebreak-revival-check';
+            }
+            if (!items.moonpearl || items.glove !== 2) return 'unavailable';
             if (!items.firerod && !(items.bombos && items.sword)) return 'unavailable';
+            if (!items.flippers) return items.hammer ? 'sequencebreak-flippers' : 'sequencebreak-flippers-check';
             return items.hammer ? 'available' : 'possible';
         }
     }, { // [8]
@@ -140,20 +152,54 @@
         is_beaten: false,
         is_beatable: function() {
             if (!melee_bow()) return 'unavailable';
-            if (!items.moonpearl || !items.flute || items.glove !== 2 || !items.somaria) return 'unavailable';
+            if (!items.flute || items.glove !== 2 || !items.somaria) return 'unavailable';
             if (!items.boots && !items.hookshot) return 'unavailable';
             var state = medallion_check(0);
-            if (state) return state;
+            if (state === 'unavailable') {
+                return state;
+            }
+
+            if (!items.moonpearl && items.mirror && items.flippers && items.bottle) {
+                    if (items.lantern) {
+                        return state ? 'sequencebreak-revival-check' : 'sequencebreak-revival';
+                    } else {
+                        return 'sequencebreak-revival-check';
+                    }
+            }
+
+            if (!items.moonpearl) {
+                return 'unavailable';
+            }
+            if (state) {
+                return state;
+            }
 
             return items.lantern || items.firerod ?
                 items.lantern ? 'available' : 'dark' :
                 'possible';
         },
         can_get_chest: function() {
-            if (!items.moonpearl || !items.flute || items.glove !== 2) return 'unavailable';
+            if (!items.flute || items.glove !== 2) return 'unavailable';
             if (!items.boots && !items.hookshot) return 'unavailable';
             var state = medallion_check(0);
-            if (state) return state;
+            if (state === 'unavailable') {
+                return state;
+            }
+
+            if (!items.moonpearl && items.mirror && items.flippers && items.bottle) {
+                    if ((items.chest8 > 1 || (items.somaria && items.lantern)) && (items.lantern || items.firerod)) {
+                        return state ? 'sequencebreak-revival-check' : 'sequencebreak-revival';
+                    } else {
+                        return 'sequencebreak-revival-check';
+                    }
+            }
+
+            if (!items.moonpearl) {
+                return 'unavailable';
+            }
+            if (state) {
+                return state;
+            }
 
             return (items.chest8 > 1 ?
                 items.lantern || items.firerod :
@@ -263,15 +309,28 @@
         caption: 'West of Mire (2)',
         is_opened: false,
         is_available: function() {
-            return items.moonpearl && items.flute && items.glove === 2 ? 'available' : 'unavailable';
+            if (items.flute && items.glove === 2) {
+                if (items.moonpearl) {
+                    return 'available';
+                } else if (items.mirror) {
+                    return 'sequencebreak-bunny';
+                }
+            }
+            return 'unavailable';
         }
     }, { // [11]
         caption: 'Super Bunny Chests (2)',
         is_opened: false,
         is_available: function() {
-            return items.moonpearl && items.glove === 2 && (items.hookshot || items.mirror && items.hammer) ?
-                items.lantern || items.flute ? 'available' : 'dark' :
-                'unavailable';
+            if (items.glove === 2 && (items.hookshot || items.mirror && items.hammer)) {
+                if ((items.lantern || items.flute) && items.moonpearl) {
+                    return 'available';
+                } else if (items.moonpearl) {
+                    return 'dark';
+                }
+                return 'sequencebreak-bunny';
+            }
+            return 'unavailable'
         }
     }, { // [12]
         caption: 'Sahasrahla\'s Hut (3) {bomb}/{boots}',
@@ -379,7 +438,7 @@
         caption: 'Fugitive under the bridge {flippers}',
         is_opened: false,
         is_available: function() {
-            return items.flippers ? 'available' : 'unavailable';
+            return items.flippers ? 'available' : 'sequencebreak-flippers';
         }
     }, { // [30]
         caption: 'Ether Tablet {sword2}{book}',
@@ -403,14 +462,16 @@
         caption: 'Catfish',
         is_opened: false,
         is_available: function() {
-            return items.moonpearl && items.glove && (items.agahnim || items.hammer || items.glove === 2 && items.flippers) ?
-                'available' : 'unavailable';
+            if (items.moonpearl && items.glove && (items.agahnim || items.hammer || items.glove === 2 && items.flippers)) return 'available';
+            if (items.glove === 2 && !items.flippers && !items.hammer && items.boots) return 'sequencebreak-jesusdash';
+            if (items.glove === 2 && !items.flippers && !items.hammer && items.bottle) return 'sequencebreak-revival';
+            return 'unavailable';
         }
     }, { // [33]
         caption: 'King Zora: Pay 500 rupees',
         is_opened: false,
         is_available: function() {
-            return items.flippers || items.glove ? 'available' : 'unavailable';
+            return items.flippers || items.glove ? 'available' : 'sequencebreak-flippers';
         }
     }, { // [34]
         caption: 'Lost Old Man {lantern}',
@@ -512,10 +573,23 @@
         caption: 'Lake Hylia Island {mirror}',
         is_opened: false,
         is_available: function() {
-            return items.flippers ?
-                items.moonpearl && items.mirror && (items.agahnim || items.glove === 2 || items.glove && items.hammer) ?
-                    'available' : 'possible' :
-                'unavailable';
+            if (items.mirror && items.moonpearl && (items.agahnim || items.glove === 2 || items.glove && items.hammer)) {
+                if (items.flippers) {
+                    return 'available';
+                } else if (items.boots) {
+                    return 'sequencebreak-jesusdash';
+                } else if (items.bottle) {
+                    return 'sequencebreak-revival';
+                } else {
+                    return 'sequencebreak-flippers-check';
+                }
+            } else {
+                if (items.flippers) {
+                    return 'possible';
+                } else {
+                    return 'sequencebreak-flippers-check';
+                }
+            }
         }
     }, { // [50]
         caption: 'Bumper Cave {cape}',
@@ -529,8 +603,18 @@
         caption: 'Pyramid',
         is_opened: false,
         is_available: function() {
-            return items.agahnim || items.glove && items.hammer && items.moonpearl ||
-                items.glove === 2 && items.moonpearl && items.flippers ? 'available' : 'unavailable';
+            if (items.agahnim || items.glove && items.hammer && items.moonpearl) {
+                return 'available';
+            } else if (items.glove === 2 && items.moonpearl) {
+                if (items.hammer || items.flippers) {
+                    return 'available';
+                } else if (items.boots) {
+                    return 'sequencebreak-jesusdash';
+                } else if (items.bottle) {
+                    return 'sequencebreak-revival';
+                }
+            }
+            return 'unavailable';
         }
     }, { // [52]
         caption: 'Alec Baldwin\'s Dig-a-Thon: Pay 80 rupees',
@@ -543,8 +627,9 @@
         is_opened: false,
         is_available: function() {
             if (items.flippers) return 'available';
+            if (items.bottle && (items.moonpearl || items.boots)) return 'sequencebreak-revival';
             if (items.glove) return 'possible';
-            return 'unavailable';
+            return 'sequencebreak-flippers-check';
         }
     }, { // [54]
         caption: 'Buried Itam {shovel}',
@@ -575,7 +660,17 @@
         caption: 'Mad Batter {hammer}/{mirror} + {powder}',
         is_opened: false,
         is_available: function() {
-            return items.powder && (items.hammer || items.glove === 2 && items.mirror && items.moonpearl) ? 'available' : 'unavailable';
+            if (items.hammer || items.glove === 2 && items.mirror && items.moonpearl) {
+                if (items.powder) {
+                    return 'available';
+                } else if (items.somaria && items.mushroom) {
+                    return 'sequencebreak-powder';
+                } else {
+                    return 'unavailable';
+                }
+            } else {
+                return 'unavailable';
+            }
         }
     }, { // [60]
         caption: 'Take the frog home {mirror} / Save+Quit',
@@ -620,7 +715,7 @@
         caption: 'Waterfall of Wishing (2) {flippers}',
         is_opened: false,
         is_available: function() {
-            return items.flippers ? 'available' : 'unavailable';
+            return items.flippers ? 'available' : (items.moonpearl ? 'sequencebreak-jesusdash' : 'unavailable');
         }
     }];
 }(window));
