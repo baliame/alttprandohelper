@@ -29,7 +29,7 @@
           <div class="row">
             <div class="cell">
               <div class="boss boss0" onClick="toggle('boss0')"></div>
-              <div id="dungeonPrize0" class="prize-0" onClick="toggle_dungeon(0)"></div>
+              <div id="dungeonPrize0" class="prize-0" onClick="toggle_dungeon(0)" onContextMenu="set_crystal(0); return false;"></div>
               <div id="kchests0" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests0')"></div>
             </div>
             <div class="cell">
@@ -46,7 +46,7 @@
           <div class="row">
             <div class="cell">
               <div class="boss boss1" onClick="toggle('boss1')"></div>
-              <div id="dungeonPrize1" class="prize-0" onClick="toggle_dungeon(1)"></div>
+              <div id="dungeonPrize1" class="prize-0" onClick="toggle_dungeon(1)" onContextMenu="set_crystal(1); return false;"></div>
               <div id="kchests1" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests1')"></div>
             </div>
             <div class="cell">
@@ -63,7 +63,7 @@
           <div class="row">
             <div class="cell">
               <div class="boss boss2" onClick="toggle('boss2')"></div>
-              <div id="dungeonPrize2" class="prize-0" onClick="toggle_dungeon(2)"></div>
+              <div id="dungeonPrize2" class="prize-0" onClick="toggle_dungeon(2)" onContextMenu="set_crystal(2); return false;"></div>
               <div id="kchests2" class="ks-chests ks-chests-6 isnotachest" onClick="toggle('kchests2')"></div>
             </div>
             <div class="cell">
@@ -119,39 +119,39 @@
       <div class="row">
         <div class="cell">
           <div class="boss boss3" onClick="toggle('boss3')"></div>
-          <div id="dungeonPrize3" class="prize-0" onClick="toggle_dungeon(3)"></div>
+          <div id="dungeonPrize3" class="prize-0" onClick="toggle_dungeon(3)" onContextMenu="set_crystal(3); return false;"></div>
           <div id="kchests3" class="ks-chests ks-chests-14 isnotachest" onClick="toggle('kchests3')"></div>
         </div>
         <div class="cell">
           <div class="boss boss4" onClick="toggle('boss4')"></div>
-          <div id="dungeonPrize4" class="prize-0" onClick="toggle_dungeon(4)"></div>
+          <div id="dungeonPrize4" class="prize-0" onClick="toggle_dungeon(4)" onContextMenu="set_crystal(4); return false;"></div>
           <div id="kchests4" class="ks-chests ks-chests-10 isnotachest" onClick="toggle('kchests4')"></div>
         </div>
         <div class="cell">
           <div class="boss boss5" onClick="toggle('boss5')"></div>
-          <div id="dungeonPrize5" class="prize-0" onClick="toggle_dungeon(5)"></div>
+          <div id="dungeonPrize5" class="prize-0" onClick="toggle_dungeon(5)" onContextMenu="set_crystal(5); return false;"></div>
           <div id="kchests5" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests5')"></div>
         </div>
         <div class="cell">
           <div class="boss boss6" onClick="toggle('boss6')"></div>
-          <div id="dungeonPrize6" class="prize-0" onClick="toggle_dungeon(6)"></div>
+          <div id="dungeonPrize6" class="prize-0" onClick="toggle_dungeon(6)" onContextMenu="set_crystal(6); return false;"></div>
           <div id="kchests6" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests6')"></div>
         </div>
         <div class="cell">
           <div class="boss boss7" onClick="toggle('boss7')"></div>
-          <div id="dungeonPrize7" class="prize-0" onClick="toggle_dungeon(7)"></div>
+          <div id="dungeonPrize7" class="prize-0" onClick="toggle_dungeon(7)" onContextMenu="set_crystal(7); return false;"></div>
           <div id="kchests7" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests7')"></div>
         </div>
         <div class="cell">
           <div class="boss boss8" onClick="toggle('boss8')"></div>
-          <div id="medallion0" class="medallion-0" onClick="toggle_medallion(0)"></div>
-          <div id="dungeonPrize8" class="prize-0" onClick="toggle_dungeon(8)"></div>
+          <div id="medallion0" class="medallion-0" onClick="toggle_medallion(0)" onContextMenu="untoggle_medallion(0); return false;"></div>
+          <div id="dungeonPrize8" class="prize-0" onClick="toggle_dungeon(8)" onContextMenu="set_crystal(8); return false;"></div>
           <div id="kchests8" class="ks-chests ks-chests-8 isnotachest" onClick="toggle('kchests8')"></div>
         </div>
         <div class="cell">
           <div class="boss boss9" onClick="toggle('boss9')"></div>
-          <div id="medallion1" class="medallion-0" onClick="toggle_medallion(1)"></div>
-          <div id="dungeonPrize9" class="prize-0" onClick="toggle_dungeon(9)"></div>
+          <div id="medallion1" class="medallion-0" onClick="toggle_medallion(1)" onContextMenu="untoggle_medallion(1); return false;"></div>
+          <div id="dungeonPrize9" class="prize-0" onClick="toggle_dungeon(9)" onContextMenu="set_crystal(9); return false;"></div>
           <div id="kchests9" class="ks-chests ks-chests-12 isnotachest" onClick="toggle('kchests9')"></div>
         </div>
       </div>
@@ -317,6 +317,12 @@
       <div id="dungeon8" onMouseover="highlight_dungeon(8)" onMouseout="unhighlight_dungeon(8)"></div>
       <div id="bossMap9" onMouseover="highlight_dungeon(9)" onMouseout="unhighlight_dungeon(9)"></div>
       <div id="dungeon9" onMouseover="highlight_dungeon(9)" onMouseout="unhighlight_dungeon(9)"></div>
+      <div id="dungeon10" onMouseover="highlight_dungeon(10)" onMouseout="unhighlight_dungeon(10)" onClick="toggle('chest10')"><div id="chestsGT10" class="GTchest"></div></div>
+      <div id="dungeon11" onMouseover="highlight_dungeon(11)" onMouseout="unhighlight_dungeon(11)" onClick="toggle('chest11')"><div id="chestsGT11" class="GTchest"></div></div>
+      <div id="dungeon12" onMouseover="highlight_dungeon(12)" onMouseout="unhighlight_dungeon(12)" onClick="toggle('chest12')"><div id="chestsGT12" class="GTchest"></div></div>
+      <div id="dungeon13" onMouseover="highlight_dungeon(13)" onMouseout="unhighlight_dungeon(13)" onClick="toggle('chest13')"><div id="chestsGT13" class="GTchest"></div></div>
+      <div id="dungeon14" onMouseover="highlight_dungeon(14)" onMouseout="unhighlight_dungeon(14)" onClick="toggle('chest14')"><div id="chestsGT14" class="GTchest"></div></div>
+      <div id="dungeon15" onMouseover="highlight_dungeon(15)" onMouseout="unhighlight_dungeon(15)" onClick="toggle('chest15')"><div id="GTaga"></div></div>
       <div id="caption">&nbsp;</div>
     </div>
 

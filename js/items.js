@@ -2,7 +2,7 @@
     'use strict';
 
     var query = uri_query(),
-        sword = query.mode === 'open' ? 0 : 1;
+        sword = query.mode === 'standard' ? 1 : 0;
 
     window.items = {
         tunic: 1,
@@ -61,6 +61,12 @@
         chest7: 3,
         chest8: 2,
         chest9: 5,
+        chest10: 3,
+        chest11: 10,
+        chest12: 5,
+        chest13: 5,
+        chest14: 4,
+        chest15: 1,
 
         bk0: 0,
         bk1: 0,
@@ -137,6 +143,12 @@
             chest7: { max: 3 },
             chest8: { max: 2 },
             chest9: { max: 5 },
+            chest10: { max: 3 },
+            chest11: { max: 10 },
+            chest12: { max: 5 },
+            chest13: { max: 5 },
+            chest14: { max: 4 },
+            chest15: { max: 1 },
             kchests0: { max: 6 },
             kchests1: { max: 6 },
             kchests2: { max: 6 },

@@ -10,6 +10,7 @@
     window.gomode_indicator = (query.gomode !== "no");
     window.gomode_mode = query.gomode;
     window.ks = query.ks;
+    window.ow_glitches = false;
 
     // Utility function: remove item from array.
     window.arr_remove = function(array, element) {
@@ -48,11 +49,22 @@
         }
         if (label.substring(0,5) === 'chest') {
             var value = items.dec(label);
-            document.getElementById(label).className = 'chest-' + value;
+            if (document.getElementById(label) !== null) {
+                document.getElementById(label).className = 'chest-' + value;
+            }
             if (map_enabled) {
                 var x = label.substring(5);
-                document.getElementById('dungeon'+x).className = 'dungeon ' +
-                    (value ? dungeons[x].can_get_chest() : 'opened');
+                if (x.length > 1) {
+                    var highlight = document.getElementById('dungeon'+x).classList.contains('highlight');
+                    document.getElementById('dungeon'+x).className = 'dungeon ganonstower ' +
+                        (value ? dungeons[x].can_get_chest() : 'opened') + (highlight ? ' highlight': '');
+                    if (document.getElementById('chestsGT'+x) !== null) {
+                        document.getElementById('chestsGT'+x).className = 'GTchest ks-chests-' + gtchestget(x);
+                    }
+                } else {
+                    document.getElementById('dungeon'+x).className = 'dungeon ' +
+                        (value ? dungeons[x].can_get_chest() : 'opened');
+                }
             }
             return;
         }
@@ -78,9 +90,20 @@
             }
             for (var k = 0; k < dungeons.length; k++) {
                 if (!dungeons[k].is_beaten)
-                    document.getElementById('bossMap'+k).className = 'boss ' + dungeons[k].is_beatable();
-                if (items['chest'+k])
-                    document.getElementById('dungeon'+k).className = 'dungeon ' + dungeons[k].can_get_chest();
+                    if (document.getElementById('bossMap'+k) !== null) {
+                        document.getElementById('bossMap'+k).className = 'boss ' + dungeons[k].is_beatable();
+                    }
+                if (items['chest'+k]) {
+                    if (k > 9) {
+                    var highlight = document.getElementById('dungeon'+k).classList.contains('highlight');
+                        document.getElementById('dungeon'+k).className = 'dungeon ganonstower ' + dungeons[k].can_get_chest()  + (highlight ? ' highlight': '');
+                        if (document.getElementById('chestsGT'+k) !== null) {
+                            document.getElementById('chestsGT'+k).className = 'GTchest ks-chests-' + gtchestget(k);
+                        }
+                    } else {
+                        document.getElementById('dungeon'+k).className = 'dungeon ' + dungeons[k].can_get_chest();
+                    }
+                }
             }
             // Clicking a boss on the tracker will check it off on the map!
             if (is_boss) {
@@ -99,6 +122,24 @@
     window.toggle_dungeon = function(n) {
         prizes[n] += 1;
         if (prizes[n] === 5) prizes[n] = 0;
+
+        document.getElementById('dungeonPrize'+n).className = 'prize-' + prizes[n];
+
+        if (map_enabled) {
+            // Update Sahasralah, Fat Fairy, and Master Sword Pedestal
+            var pendant_chests = [25, 61, 62];
+            for (var k = 0; k < pendant_chests.length; k++) {
+                if (!chests[pendant_chests[k]].is_opened)
+                    document.getElementById('chestMap'+pendant_chests[k]).className = 'chest ' + chests[pendant_chests[k]].is_available();
+            }
+        }
+        if (gomode_indicator) {
+            update_gomode_list()
+        }
+    };
+
+    window.set_crystal = function(n) {
+        prizes[n] = 3;
 
         document.getElementById('dungeonPrize'+n).className = 'prize-' + prizes[n];
 
@@ -140,6 +181,41 @@
             update_gomode_list()
         }
     };
+
+    window.untoggle_medallion = function(n) {
+        medallions[n] -= 1;
+        if (medallions[n] === -1) medallions[n] = 3;
+
+        document.getElementById('medallion'+n).className = 'medallion-' + medallions[n];
+
+        if (map_enabled) {
+            // Update availability of dungeon boss AND chests
+            dungeons[8+n].is_beaten = !dungeons[8+n].is_beaten;
+            toggle_boss(8+n);
+            if (items['chest'+(8+n)] > 0)
+                document.getElementById('dungeon'+(8+n)).className = 'dungeon ' + dungeons[8+n].can_get_chest();
+            // TRock medallion affects Mimic Cave
+            if (n === 1) {
+                chests[4].is_opened = !chests[4].is_opened;
+                toggle_chest(4);
+            }
+            // Change the mouseover text on the map
+            dungeons[8+n].caption = dungeons[8+n].caption.replace(/\{medallion\d+\}/, '{medallion'+medallions[n]+'}');
+        }
+        if (gomode_indicator) {
+            update_gomode_list()
+        }
+    };
+
+    window.crystals = function() {
+        var cnt = 0
+        for (var k = 0; k < 10; k++) {
+            if ((prizes[k] === 3 || prizes[k] === 4) && items['boss'+k]) {
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 
 
     if (gomode_indicator) {
@@ -535,6 +611,12 @@
         // Event of clicking a chest on the map
         window.toggle_chest = function(x) {
             chests[x].is_opened = !chests[x].is_opened;
+            if (chests[x].dependency && map_enabled) {
+                for (var k = 0; k < chests.length; k++) {
+                    if (!chests[k].is_opened)
+                        document.getElementById('chestMap'+k).className = 'chest ' + chests[k].is_available();
+                }
+            }
             var highlight = document.getElementById('chestMap'+x).classList.contains('highlight');
             document.getElementById('chestMap'+x).className = 'chest ' +
                 (chests[x].is_opened ? 'opened' : chests[x].is_available()) +
@@ -588,6 +670,10 @@
         });
     }
 
+    window.gtchestget = function(n) {
+        return items['chest' + n];
+    }
+
     window.start = function() {
         for (var k = 0; k < dungeons.length; k++) {
             prizes[k] = 0;
@@ -599,8 +685,13 @@
             $('.isnotachest').remove();
         }
 
-        if (mode !== 'open') {
+        if (mode === 'standard') {
             document.getElementsByClassName('sword')[0].classList.add('active-1');
+        }
+
+        if (mode === 'open_owg') {
+            toggle('boots');
+            window.ow_glitches = true;
         }
 
         if (map_enabled) {
@@ -610,8 +701,18 @@
             document.getElementById('bossMapAgahnim').className = 'boss';
             document.getElementById('castle').className = 'castle ' + agahnim.is_available();
             for (k = 0; k < dungeons.length; k++) {
-                document.getElementById('bossMap'+k).className = 'boss ' + dungeons[k].is_beatable();
-                document.getElementById('dungeon'+k).className = 'dungeon ' + dungeons[k].can_get_chest();
+                if (document.getElementById('bossMap'+k) !== null) {
+                    document.getElementById('bossMap'+k).className = 'boss ' + dungeons[k].is_beatable();
+                }
+                if (k > 9) {
+                    var highlight = document.getElementById('dungeon'+k).classList.contains('highlight');
+                    document.getElementById('dungeon'+k).className = 'dungeon ganonstower ' + dungeons[k].can_get_chest() + (highlight ? ' highlight': '');
+                    if (document.getElementById('chestsGT'+k) !== null) {
+                        document.getElementById('chestsGT'+k).className = 'GTchest ks-chests-' + gtchestget(k);
+                    }
+                } else {
+                    document.getElementById('dungeon'+k).className = 'dungeon ' + dungeons[k].can_get_chest();
+                }
             }
         } else {
             document.getElementById('app').classList.add('mapless');

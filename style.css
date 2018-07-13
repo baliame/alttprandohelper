@@ -138,6 +138,22 @@ span.caption.go { color: red; }
   background-size: 100% 100%;
 }
 
+.ganonstower {
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  position: absolute;
+  background-size: 100% 100%;
+}
+
+.GTchest {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  margin-top: 4px;
+}
+
 .chest,
 .castle,
 .dungeon { background-image: url(images/overlay/poi.png); }
@@ -168,6 +184,10 @@ span.caption.go { color: red; }
 .sequencebreak-bunny {
   background-color: thistle;
 }
+.major-glitch {
+  background-color: #FFF5EE;
+}
+
 .possible { background-color: yellow; }
 .dark { background-color: blue; }
 .opened { background-color: #7f7f7f; }
@@ -293,6 +313,19 @@ span.caption.go { color: red; }
 #bossMap7, #dungeon7 { left: 89.8%; top: 85.8%; }
 #bossMap8, #dungeon8 { left: 55.8%; top: 82.9%; }
 #bossMap9, #dungeon9 { left: 96.9%; top: 7.0%; }
+#bossMap10, #dungeon10 { left: 78.0%; top: 5.5%; }
+#bossMap11, #dungeon11 { left: 75.5%; top: 7.8%; }
+#bossMap12, #dungeon12 { left: 80.5%; top: 7.8%; }
+#bossMap13, #dungeon13 { left: 78.0%; top: 10.5%; }
+#bossMap14, #dungeon14 { left: 75.5%; top: 2.8%; }
+#bossMap15, #dungeon15 { left: 80.5%; top: 2.8%; }
+#GTaga { width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  margin-top: 4px;
+  background-image:url(images/dungeons/agahnim0.png);
+  background-size: contain;
+}
 
 #bossMapAgahnim, #castle { left: 25.0%; top: 52.6%; }
 
@@ -309,7 +342,7 @@ span.caption.go { color: red; }
 #chestMap10 { left: 51.7%; top: 79.5%; }
 #chestMap11 { left: 92.8%; top: 14.7%; }
 #chestMap12 { left: 40.7%; top: 41.4%; }
-#chestMap13 { left: 78.6%; top: 14.9%; }
+#chestMap13 { left: 78.6%; top: 15.9%; }
 #chestMap14 { left: 1.7%;  top: 41.0%; }
 #chestMap15 { left: 6.4%;  top: 41.0%; }
 #chestMap16 { left: 80.0%; top: 77.1%; }

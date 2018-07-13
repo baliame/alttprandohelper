@@ -9,7 +9,7 @@
 
         q = hi >= 0 ? href.substring(0, hi) : href;
         q = qi >= 0 ? href.substring(qi) : '';
-        
+
         // clean out leading question, trim amps, and consecutive amps
         return q.replace(/&+/g, '&').replace(/^\?*&*|&+$/g, '')
             .split('&').reduce(function(items, param) {
